@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "763682806158",
+    "project_id": "soytul-prueba",
+    "storage_bucket": "soytul-prueba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:763682806158:android:3b6ce7ba2831fb89bbecdf",
+        "android_client_info": {
+          "package_name": "com.example.soytul"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "763682806158-fk6dersfnbpae9jg21a4na0f6q1c7dm0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEuZVm3QT8I_fzH8sxdsXcsFYLXuBIcgw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "763682806158-fk6dersfnbpae9jg21a4na0f6q1c7dm0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
