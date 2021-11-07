@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:soytul/src/domain/models/product_model.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key key}) : super(key: key);
@@ -27,9 +28,9 @@ class HomeView extends StatelessWidget {
             return ListView.builder(
               itemCount: data.length,
               itemBuilder: (_, index) {
-                var item = data[index].data();
+                var item = Product.fromMap( data[index].data());
 
-                return Text(item["sku"]);
+                return Text(item.sku);
               },
             );
           }
