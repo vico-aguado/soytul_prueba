@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:soytul/src/app/router.dart';
-import 'package:soytul/src/presentation/sections/settings/bloc/cubit/theme_cubit.dart';
+import 'package:soytul/src/presentation/sections/settings/bloc/theme_cubit.dart';
 
 class SoytulApp extends StatelessWidget {
   final AppRouter router;

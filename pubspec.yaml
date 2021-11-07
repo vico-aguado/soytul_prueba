@@ -19,6 +19,7 @@ dependencies:
   flutter_switch: ^0.2.2
   hydrated_bloc: ^6.1.0
   path_provider: ^1.6.28
+  badges: ^1.2.0
 
 dev_dependencies:
   flutter_test:
