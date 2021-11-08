@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:soytul/src/domain/network/products_network.dart';
+import 'package:soytul/src/domain/repositories/products_repository.dart';
 import 'package:soytul/src/presentation/sections/cart/cart_view.dart';
+import 'package:soytul/src/presentation/sections/home/bloc/products_bloc.dart';
 import 'package:soytul/src/presentation/sections/home/home_view.dart';
 import 'package:soytul/src/presentation/sections/orders/orders_view.dart';
 import 'package:soytul/src/presentation/sections/settings/settings_view.dart';
 
 class AppRouter {
+  ProductsRepository _productsRepository;
+
+  AppRouter() {
+    //_productsRepository = ProductsRepository(ProductsLocalNetwork());
+    _productsRepository = ProductsRepository(ProductsNetwork());
+  }
+
   Route generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case "/cart":
@@ -19,7 +30,12 @@ class AppRouter {
       case "/":
       case "/home":
       default:
-        return FadeRoute(widget: HomeView(), name: '/');
+        return FadeRoute(
+            widget: BlocProvider<ProductsBloc>(
+              create: (context) => ProductsBloc(_productsRepository),
+              child: HomeView(),
+            ),
+            name: '/');
     }
   }
 }

@@ -46,7 +46,10 @@ class NavBarWidget extends StatelessWidget {
             ),
             DotNavigationBarItem(
               icon: Badge(
-                badgeContent: Text("1"),
+                badgeContent: Text(
+                  "5",
+                  style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                ),
                 child: Icon(Icons.shopping_cart),
               ),
               selectedColor: Colors.black,

@@ -7,7 +7,12 @@ class ProductsRepository {
   ProductsRepository(this.network);
 
   Future<List<Product>> getProducts() async {
-    List<Map<String, dynamic>> _products = await network.getProducts();
-    return List<Product>.from(_products.map((e) => Product.fromMap(e)).toList());
+    try {
+      List<Map<String, dynamic>> _products = await network.getProducts();
+      return List<Product>.from(_products.map((e) => Product.fromMap(e)).toList());
+    } catch (e) {
+      print(e);
+      rethrow;
+    }
   }
 }

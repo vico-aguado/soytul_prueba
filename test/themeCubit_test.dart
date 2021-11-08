@@ -3,13 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:mockito/mockito.dart';
+import 'package:soytul/src/domain/models/product_model.dart';
+import 'package:soytul/src/domain/repositories/products_repository.dart';
+import 'package:soytul/src/presentation/sections/home/bloc/products_bloc.dart';
 import 'package:soytul/src/presentation/sections/settings/bloc/theme_cubit.dart';
 
 class MockStorage extends Mock implements HydratedStorage {}
 
+class MockProductsRepository extends Mock implements ProductsRepository {}
+
 void main() {
   //TestWidgetsFlutterBinding.ensureInitialized();
   MockStorage storage;
+  ProductsRepository productsRepository;
 
   setUp(() async {
     storage = MockStorage();
@@ -18,6 +24,8 @@ void main() {
     when(storage.read(any)).thenAnswer((_) => {'brightness': 0});
     when(storage.delete(any)).thenAnswer((_) async {});
     when(storage.clear()).thenAnswer((_) async {});
+
+    productsRepository = MockProductsRepository();
   });
 
   test('[ HydratedBloc ] => Storage getter returns correct storage instance', () {
@@ -33,12 +41,12 @@ void main() {
     });
 
     test('=> work properly', () {
-        final themeCubit = ThemeCubit();
-        expect(
-          themeCubit.fromJson(themeCubit.toJson(themeCubit.state)),
-          themeCubit.state,
-        );
-      });
+      final themeCubit = ThemeCubit();
+      expect(
+        themeCubit.fromJson(themeCubit.toJson(themeCubit.state)),
+        themeCubit.state,
+      );
+    });
 
     blocTest(
       "=> Initial test",
@@ -59,7 +67,7 @@ void main() {
       act: (bloc) {
         bloc.changeTheme();
         bloc.changeTheme();
-      } ,
+      },
       expect: [Brightness.light, Brightness.dark],
     );
 
@@ -69,19 +77,48 @@ void main() {
       act: (bloc) {
         bloc.changeTheme();
         bloc.changeTheme();
-      } ,
+      },
       skip: 1,
       expect: [Brightness.dark],
     );
   });
 
+  group("[ ProductsBloc ]", () {
+    test("=> Initial call state ", () {
+      ProductsBloc bloc = ProductsBloc(productsRepository);
+      expect(bloc.state, ProductsInitial());
+      bloc.close();
+    });
+
+    blocTest(
+      "=> Get correct data",
+      build: () {
+        when(productsRepository.getProducts()).thenAnswer((_) {
+          return Future<List<Product>>.value([]);
+        });
+
+        return ProductsBloc(productsRepository);
+      },
+      expect: [ProductsLoaded(products: [])],
+    );
+
+
+    blocTest<ProductsBloc, ProductsState>(
+      "=> Refresh event test",
+      build: () {
+        when(productsRepository.getProducts()).thenAnswer((_) {
+          return Future<List<Product>>.value([]);
+        });
+
+        return ProductsBloc(productsRepository);
+      },
+      act: (bloc) => bloc.add(ProductsRefreshed()),
+      expect: [ProductsLoaded(products: [])],
+    );
 
 
 
-
-
-
-  
+  });
 }
 
 /* 
@@ -90,5 +127,5 @@ void main() {
       expect();
     }, onError: (error) {
       print(error);
-    });
+    });     
   */

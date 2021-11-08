@@ -1,52 +1,64 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:soytul/src/domain/models/product_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:soytul/src/presentation/sections/home/bloc/products_bloc.dart';
 import 'package:soytul/src/presentation/widgets/nav_bar.dart';
+import 'package:soytul/src/presentation/widgets/product_tile_widget.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    CollectionReference products = FirebaseFirestore.instance.collection('products');
-
     return Scaffold(
-      extendBody: true,
-      body: Column(
-        children: [
-          Expanded(
-            child: FutureBuilder<QuerySnapshot>(
-              future: products.get(),
-              builder: (_, AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (snapshot.hasError) {
-                  return Text("Something went wrong");
-                }
+        extendBody: true,
+        body: SafeArea(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                "Productos",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Expanded(child: BlocBuilder<ProductsBloc, ProductsState>(
+                builder: (_, state) {
+                  print(state);
 
-                if (!snapshot.hasData && snapshot.connectionState == ConnectionState.done) {
-                  return Text("Document does not exist");
-                }
+                  if (state is ProductsError) {
+                    print(state.error);
+                  }
 
-                if (snapshot.connectionState == ConnectionState.done) {
-                  List<QueryDocumentSnapshot> data = snapshot.data.docs;
+                  if (state is ProductsLoaded) {
+                    if (state.products.isEmpty) {
+                      return Center(child: Text("Sin productos aún"));
+                    }
+                    return RefreshIndicator(
+                      onRefresh: () async {
+                        BlocProvider.of<ProductsBloc>(context).add(ProductsRefreshed());
+                        await Future.delayed(Duration(milliseconds: 500));
+                        return true;
+                      },
+                      child: ListView.builder(
+                        itemCount: state.products.length,
+                        itemBuilder: (_, index) {
+                          var item = state.products[index];
 
-                  return ListView.builder(
-                    itemCount: data.length,
-                    itemBuilder: (_, index) {
-                      var item = Product.fromMap(data[index].data());
+                          return ProductTileWidget(product: item);
+                        },
+                      ),
+                    );
+                  }
 
-                      return Text(item.sku);
-                    },
-                  );
-                }
-
-                return Text("loading");
-              },
-            ),
+                  return Center(child: CircularProgressIndicator());
+                },
+              )),
+            ],
           ),
-         
-        ],
-      ),
-       bottomNavigationBar: NavBarWidget(currentIndex: 0)
-    );
+        ),
+        bottomNavigationBar: NavBarWidget(currentIndex: 0));
   }
 }
