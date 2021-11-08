@@ -11,7 +11,11 @@ class ThemeCubit extends HydratedCubit<Brightness> {
 
   @override
   Brightness fromJson(Map<String, dynamic> json) {
-    return Brightness.values[json['brightness'] as int];
+    if (json['brightness'] != null) {
+      return Brightness.values[json['brightness'] as int];
+    } else {
+      return Brightness.light;
+    }
   }
 
   @override
