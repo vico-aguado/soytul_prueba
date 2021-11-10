@@ -51,14 +51,14 @@ class ProductTileWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                    height: 80,
+                    height: 95,
                     width: 80,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: Image.network(
                         product.image,
                         width: 80,
-                        height: 80,
+                        height: 95,
                         fit: BoxFit.cover,
                         loadingBuilder: (_, child, loadingProgress) {
                           if (loadingProgress == null) {
@@ -78,7 +78,7 @@ class ProductTileWidget extends StatelessWidget {
                 ),
                 Expanded(
                   child: SizedBox(
-                    height: 80,
+                    height: 95,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -92,7 +92,11 @@ class ProductTileWidget extends StatelessWidget {
                         ),
                         Text(
                           product.description,
-                          style: TextStyle(fontSize: 12, color: Colors.blueGrey),
+                          textAlign: TextAlign.justify,
+                          style: TextStyle(
+                            fontSize: isCart ? 10 : 12,
+                            color: Colors.blueGrey,
+                          ),
                         ),
                         Spacer(),
                         Text(
@@ -103,10 +107,13 @@ class ProductTileWidget extends StatelessWidget {
                     ),
                   ),
                 ),
+                SizedBox(
+                  width: 10,
+                ),
                 !isCart
                     ? SizedBox(
                         width: 40,
-                        height: 80,
+                        height: 95,
                         child: IconButton(
                             icon: Icon(
                               Icons.add_shopping_cart,
@@ -118,7 +125,7 @@ class ProductTileWidget extends StatelessWidget {
                       )
                     : SizedBox(
                         width: 70,
-                        height: 80,
+                        height: 95,
                         child: Center(
                           child: CartStepper<int>(
                             count: product.quantity,
