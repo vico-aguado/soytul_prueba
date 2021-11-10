@@ -11,22 +11,22 @@ enum CartStatus {
 class Cart extends Equatable {
   final int id;
   final CartStatus status;
-  final List<Product> prooducts;
+  final List<Product> products;
   Cart({
     @required this.id,
     @required this.status,
-    @required this.prooducts,
+    @required this.products,
   });
 
   Cart copyWith({
     int id,
     CartStatus status,
-    List<Product> prooducts,
+    List<Product> products,
   }) {
     return Cart(
       id: id ?? this.id,
       status: status ?? this.status,
-      prooducts: prooducts ?? this.prooducts,
+      products: products ?? this.products,
     );
   }
 
@@ -34,15 +34,20 @@ class Cart extends Equatable {
     return {
       'id': id,
       'status': status.index,
-      'prooducts': prooducts?.map((x) => x.toMap())?.toList(),
+      'products': products?.map((x) => x.toMap())?.toList(),
     };
   }
 
   factory Cart.fromMap(Map<String, dynamic> map) {
+    List<Product> _products = [];
+    if(map['products'] != null) {
+      _products = List<Product>.from(map['products']?.map((x) => Product.fromMap(x)));
+    }
+
     return Cart(
       id: map['id'],
       status: CartStatus.values[map['status']],
-      prooducts: List<Product>.from(map['prooducts']?.map((x) => Product.fromMap(x))),
+      products: _products,
     );
   }
 
@@ -54,5 +59,5 @@ class Cart extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object> get props => [id, status, prooducts];
+  List<Object> get props => [id, status, products];
 }

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:soytul/src/domain/models/product_model.dart';
+import 'package:soytul/src/presentation/sections/cart/bloc/cart_bloc.dart';
+import 'package:soytul/src/presentation/widgets/cart_number_stepper.dart';
 
 class ProductTileWidget extends StatelessWidget {
   const ProductTileWidget({
@@ -10,6 +13,18 @@ class ProductTileWidget extends StatelessWidget {
 
   final Product product;
   final bool isCart;
+
+  _addToCart(BuildContext context) {
+    BlocProvider.of<CartBloc>(context).add(CartsAddProduct(product.copyWith(quantity: 1)));
+  }
+
+  _deleteFromCart(BuildContext context) {
+    BlocProvider.of<CartBloc>(context).add(CartsDeleteProduct(product));
+  }
+
+  _updateFromCart(BuildContext context, int quantity) {
+    BlocProvider.of<CartBloc>(context).add(CartsUpdateProduct(product, quantity));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +71,7 @@ class ProductTileWidget extends StatelessWidget {
                       children: [
                         Text(
                           product.name,
-                          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.indigo),
+                          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blueAccent),
                         ),
                         SizedBox(
                           height: 10,
@@ -74,16 +89,36 @@ class ProductTileWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 40,
-                  height: 80,
-                  child: IconButton(
-                      icon: Icon(
-                        Icons.add_shopping_cart,
-                        color: Colors.green,
-                      ),
-                      onPressed: () {}),
-                )
+                !isCart
+                    ? SizedBox(
+                        width: 40,
+                        height: 80,
+                        child: IconButton(
+                            icon: Icon(
+                              Icons.add_shopping_cart,
+                              color: Colors.green,
+                            ),
+                            onPressed: () {
+                              _addToCart(context);
+                            }),
+                      )
+                    : SizedBox(
+                        width: 60,
+                        height: 80,
+                        child: Center(
+                          child: CartStepper<int>(
+                            count: product.quantity,
+                            radius: Radius.circular(3),
+                            size: 20,
+                            didChangeCount: (count) {
+                              if (count < 1) {
+                                _deleteFromCart(context);
+                              } else {
+                                _updateFromCart(context, count);
+                              }
+                            },
+                          ),
+                        ))
               ],
             )),
       ),
@@ -96,6 +131,11 @@ class ProductTileWidget extends StatelessWidget {
       ),
       direction: DismissDirection.endToStart,
       confirmDismiss: (direction) {
+        if (isCart) {
+          _deleteFromCart(context);
+        } else {
+          _addToCart(context);
+        }
         return Future.value(false);
       },
       onDismissed: (direction) {},

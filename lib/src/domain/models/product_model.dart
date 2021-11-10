@@ -8,7 +8,6 @@ class Product extends Equatable {
   final String name;
   final String image;
   final String description;
-  final int stock;
   final int quantity;
 
   Product({
@@ -17,7 +16,6 @@ class Product extends Equatable {
     @required this.name,
     @required this.image,
     @required this.description,
-    @required this.stock,
     @required this.quantity,
   });
 
@@ -36,7 +34,6 @@ class Product extends Equatable {
       name: name ?? this.name,
       image: image ?? this.image,
       description: description ?? this.description,
-      stock: stock ?? this.stock,
       quantity: quantity ?? this.quantity,
     );
   }
@@ -48,7 +45,6 @@ class Product extends Equatable {
       'name': name,
       'image': image,
       'description': description,
-      'stock': stock,
       'quantity': quantity,
     };
   }
@@ -60,7 +56,6 @@ class Product extends Equatable {
       name: map['name'],
       image: map['image'],
       description: map['description'],
-      stock: map['stock'],
       quantity: map['quantity'],
     );
   }
@@ -71,7 +66,7 @@ class Product extends Equatable {
 
   @override
   String toString() {
-    return 'Product(id: $id, sku: $sku, name: $name, image: $image, description: $description, stock: $stock, quantity: $quantity)';
+    return 'Product(id: $id, sku: $sku, name: $name, image: $image, description: $description, quantity: $quantity)';
   }
 
   @override
@@ -82,7 +77,6 @@ class Product extends Equatable {
       name,
       image,
       description,
-      stock,
       quantity,
     ];
   }

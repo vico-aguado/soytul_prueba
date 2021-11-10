@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:soytul/src/domain/models/cart_model.dart';
+import 'package:soytul/src/presentation/sections/cart/bloc/cart_bloc.dart';
 import 'package:soytul/src/presentation/sections/settings/bloc/theme_cubit.dart';
 import 'package:soytul/src/presentation/widgets/nav_bar/DotNavigationBarItem.dart';
 import 'package:soytul/src/presentation/widgets/nav_bar/NavBars.dart';
@@ -45,12 +47,29 @@ class NavBarWidget extends StatelessWidget {
               selectedColor: Colors.black,
             ),
             DotNavigationBarItem(
-              icon: Badge(
-                badgeContent: Text(
-                  "5",
-                  style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
-                ),
-                child: Icon(Icons.shopping_cart),
+              icon: BlocBuilder<CartBloc, CartState>(
+                builder: (_, state) {
+                  
+                  if (state is CartsLoaded) {
+                    if (state.carts.length > 0) {
+                      List<Cart> _cartPending = state.carts.where((element) => element.status == CartStatus.PENDING).toList();
+                      if (_cartPending.isNotEmpty) {
+
+                        int total =  _cartPending.first.products.fold(0, (sum, element) => sum + element.quantity) ;
+
+                        return Badge(
+                          badgeContent: Text(
+                           total.toString(),
+                            style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                          ),
+                          child: Icon(Icons.shopping_cart),
+                        );
+                      }
+                    }
+                  }
+
+                  return Icon(Icons.shopping_cart);
+                },
               ),
               selectedColor: Colors.black,
             ),
