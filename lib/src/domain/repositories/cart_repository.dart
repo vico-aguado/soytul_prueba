@@ -32,7 +32,7 @@ class CartRepository {
     }
   }
 
-  Future<void> addProductToCart(Product product, int idCart) async {
+  Future<bool> addProductToCart(Product product, int idCart) async {
     try {
       bool _success = await network.addProductToCart(product, idCart);
       return _success;
@@ -42,7 +42,7 @@ class CartRepository {
     }
   }
 
-  Future<void> updateProductToCart(Product product, int idCart) async {
+  Future<bool> updateProductToCart(Product product, int idCart) async {
     try {
       bool _success = await network.updateProductToCart(product, idCart);
       return _success;
@@ -52,7 +52,7 @@ class CartRepository {
     }
   }
 
-  Future<void> deleteProductToCart(Product product, int idCart) async {
+  Future<bool> deleteProductToCart(Product product, int idCart) async {
     try {
       bool _success = await network.deleteProductToCart(product, idCart);
       return _success;
@@ -62,7 +62,7 @@ class CartRepository {
     }
   }
 
-  Future<void> createOrder(Cart cart) async {
+  Future<bool> createOrder(Cart cart) async {
     try {
       bool _success = await network.createCart(cart);
       return _success;

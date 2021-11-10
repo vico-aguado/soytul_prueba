@@ -60,7 +60,7 @@ class HomeView extends StatelessWidget {
                         );
                       }
 
-                      return Center(child: CircularProgressIndicator());
+                      return Container();
                     },
                   )),
                 ],

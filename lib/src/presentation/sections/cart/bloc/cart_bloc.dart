@@ -68,7 +68,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           cartPending = Cart(id: _carts.last.id + 1, products: [], status: CartStatus.PENDING);
         }
       }
-      return CartsLoaded(carts: _carts, cartPending: cartPending, datetime: DateTime.now());
+      
+      return CartsLoaded(carts: _carts, cartPending: cartPending, );
     } catch (e) {
       print(e);
       return CartsError(e);

@@ -10,12 +10,10 @@ import 'package:soytul/src/presentation/sections/settings/bloc/theme_cubit.dart'
 
 class MockStorage extends Mock implements HydratedStorage {}
 
-class MockProductsRepository extends Mock implements ProductsRepository {}
-
 void main() {
   //TestWidgetsFlutterBinding.ensureInitialized();
   MockStorage storage;
-  ProductsRepository productsRepository;
+  
 
   setUp(() async {
     storage = MockStorage();
@@ -24,8 +22,6 @@ void main() {
     when(storage.read(any)).thenAnswer((_) => {'brightness': 0});
     when(storage.delete(any)).thenAnswer((_) async {});
     when(storage.clear()).thenAnswer((_) async {});
-
-    productsRepository = MockProductsRepository();
   });
 
   test('[ HydratedBloc ] => Storage getter returns correct storage instance', () {
@@ -81,43 +77,6 @@ void main() {
       skip: 1,
       expect: [Brightness.dark],
     );
-  });
-
-  group("[ ProductsBloc ]", () {
-    test("=> Initial call state ", () {
-      ProductsBloc bloc = ProductsBloc(productsRepository);
-      expect(bloc.state, ProductsInitial());
-      bloc.close();
-    });
-
-    blocTest(
-      "=> Get correct data",
-      build: () {
-        when(productsRepository.getProducts()).thenAnswer((_) {
-          return Future<List<Product>>.value([]);
-        });
-
-        return ProductsBloc(productsRepository);
-      },
-      expect: [ProductsLoaded(products: [])],
-    );
-
-
-    blocTest<ProductsBloc, ProductsState>(
-      "=> Refresh event test",
-      build: () {
-        when(productsRepository.getProducts()).thenAnswer((_) {
-          return Future<List<Product>>.value([]);
-        });
-
-        return ProductsBloc(productsRepository);
-      },
-      act: (bloc) => bloc.add(ProductsRefreshed()),
-      expect: [ProductsLoaded(products: [])],
-    );
-
-
-
   });
 }
 
