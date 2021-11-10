@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:soytul/src/domain/models/cart_model.dart';
 import 'package:soytul/src/domain/models/product_model.dart';
+import 'package:soytul/src/util/utils.dart';
 
 abstract class CartNetworkClass {
   Future<List<Map<String, dynamic>>> getCarts();
@@ -21,7 +22,7 @@ class CartsNetwork extends CartNetworkClass {
       QuerySnapshot carts = await FirebaseFirestore.instance.collection('carts').get();
       return carts.docs.map((e) => e.data()).toList();
     } catch (e) {
-      print(e);
+      debugPrint(e);
       rethrow;
     }
   }
@@ -41,7 +42,7 @@ class CartsNetwork extends CartNetworkClass {
 
       return true;
     } catch (e) {
-      print(e);
+      debugPrint(e);
       rethrow;
     }
   }
@@ -53,7 +54,7 @@ class CartsNetwork extends CartNetworkClass {
       QuerySnapshot products = await productCartsReference.where("cart_id", isEqualTo: idCart).get();
       return products.docs.map((e) => e.data()).toList();
     } catch (e) {
-      print(e);
+      debugPrint(e);
       rethrow;
     }
   }
@@ -65,7 +66,7 @@ class CartsNetwork extends CartNetworkClass {
       QuerySnapshot products = await productsReference.where("id", isEqualTo: idProduct).get();
       return products.docs.map((e) => e.data()).toList();
     } catch (e) {
-      print(e);
+      debugPrint(e);
       rethrow;
     }
   }
@@ -84,7 +85,7 @@ class CartsNetwork extends CartNetworkClass {
 
       return true;
     } catch (e) {
-      print(e);
+      debugPrint(e);
       rethrow;
     }
   }
@@ -103,7 +104,7 @@ class CartsNetwork extends CartNetworkClass {
 
       return true;
     } catch (e) {
-      print(e);
+      debugPrint(e);
       rethrow;
     }
   }
@@ -122,7 +123,7 @@ class CartsNetwork extends CartNetworkClass {
 
       return true;
     } catch (e) {
-      print(e);
+      debugPrint(e);
       rethrow;
     }
   }

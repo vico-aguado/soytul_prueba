@@ -4,6 +4,8 @@ import 'package:soytul/src/domain/models/product_model.dart';
 import 'package:soytul/src/presentation/sections/cart/bloc/cart_bloc.dart';
 import 'package:soytul/src/presentation/widgets/cart_number_stepper.dart';
 
+import 'alert_dialog_widget.dart';
+
 class ProductTileWidget extends StatelessWidget {
   const ProductTileWidget({
     Key key,
@@ -19,7 +21,18 @@ class ProductTileWidget extends StatelessWidget {
   }
 
   _deleteFromCart(BuildContext context) {
-    BlocProvider.of<CartBloc>(context).add(CartsDeleteProduct(product));
+    showAlertDialog(
+      context: context,
+      title: "¡Alerta!",
+      message: "¿Deseas eliminar este producto de tu carrito?",
+      titleButton1: "Sí",
+      titleButton2: "No",
+      height: 220,
+      onTapButton1: () {
+        BlocProvider.of<CartBloc>(context).add(CartsDeleteProduct(product));
+      },
+      onTapButton2: () {},
+    );
   }
 
   _updateFromCart(BuildContext context, int quantity) {

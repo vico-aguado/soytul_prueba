@@ -1,6 +1,7 @@
 import 'package:soytul/src/domain/models/cart_model.dart';
 import 'package:soytul/src/domain/models/product_model.dart';
 import 'package:soytul/src/domain/network/cart_network.dart';
+import 'package:soytul/src/util/utils.dart';
 
 class CartRepository {
   final CartNetworkClass network;
@@ -27,7 +28,7 @@ class CartRepository {
 
       return _cartsTMP;
     } catch (e) {
-      print(e);
+      debugPrint(e);
       rethrow;
     }
   }
@@ -37,7 +38,7 @@ class CartRepository {
       bool _success = await network.addProductToCart(product, idCart);
       return _success;
     } catch (e) {
-      print(e);
+      debugPrint(e);
       rethrow;
     }
   }
@@ -47,7 +48,7 @@ class CartRepository {
       bool _success = await network.updateProductToCart(product, idCart);
       return _success;
     } catch (e) {
-      print(e);
+      debugPrint(e);
       rethrow;
     }
   }
@@ -57,7 +58,7 @@ class CartRepository {
       bool _success = await network.deleteProductToCart(product, idCart);
       return _success;
     } catch (e) {
-      print(e);
+      debugPrint(e);
       rethrow;
     }
   }
@@ -67,7 +68,7 @@ class CartRepository {
       bool _success = await network.createCart(cart);
       return _success;
     } catch (e) {
-      print(e);
+      debugPrint(e);
       rethrow;
     }
   }

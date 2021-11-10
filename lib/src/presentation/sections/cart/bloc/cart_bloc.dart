@@ -51,7 +51,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
       return await _loadCarts();
     } catch (e) {
-      print(e);
+      debugPrint(e);
       return CartsError(e);
     }
   }
@@ -71,7 +71,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       
       return CartsLoaded(carts: _carts, cartPending: cartPending, );
     } catch (e) {
-      print(e);
+      debugPrint(e);
       return CartsError(e);
     }
   }
@@ -95,7 +95,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       }
       return await _loadCarts();
     } catch (e) {
-      print(e);
+      debugPrint(e);
       return CartsError(e);
     }
   }
@@ -113,7 +113,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
       return await _loadCarts();
     } catch (e) {
-      print(e);
+      debugPrint(e);
       return CartsError(e);
     }
   }
@@ -131,7 +131,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
       return await _loadCarts();
     } catch (e) {
-      print(e);
+      debugPrint(e);
       return CartsError(e);
     }
   }

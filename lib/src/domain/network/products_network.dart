@@ -14,7 +14,7 @@ class ProductsNetwork extends ProductsNetworkClass {
       QuerySnapshot products = await FirebaseFirestore.instance.collection('products').get();
       return products.docs.map((e) => e.data()).toList();
     } catch (e) {
-      print(e);
+      debugPrint(e);
       rethrow;
     }
   }

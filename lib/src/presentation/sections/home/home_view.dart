@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:soytul/src/presentation/sections/cart/bloc/cart_bloc.dart';
 import 'package:soytul/src/presentation/sections/home/bloc/products_bloc.dart';
+import 'package:soytul/src/presentation/widgets/alert_dialog_widget.dart';
 import 'package:soytul/src/presentation/widgets/nav_bar.dart';
 import 'package:soytul/src/presentation/widgets/product_tile_widget.dart';
 
@@ -30,9 +31,12 @@ class HomeView extends StatelessWidget {
                   ),
                   Expanded(child: BlocBuilder<ProductsBloc, ProductsState>(
                     builder: (_, state) {
-                      
                       if (state is ProductsError) {
-                        print(state.error);
+                        showAlertDialog(
+                          context: context,
+                          title: "¡Error!",
+                          message: state.error,
+                        );
                       }
 
                       if (state is ProductsLoaded) {
@@ -68,7 +72,6 @@ class HomeView extends StatelessWidget {
             ),
             BlocBuilder<CartBloc, CartState>(
               builder: (_, state) {
-                print(state);
                 if (state is CartsLoading) {
                   return Container(
                       color: Colors.black.withOpacity(0.6),
@@ -77,7 +80,10 @@ class HomeView extends StatelessWidget {
                       ));
                 }
 
-                return Container(height: 0, width: 0,);
+                return Container(
+                  height: 0,
+                  width: 0,
+                );
               },
             )
           ],

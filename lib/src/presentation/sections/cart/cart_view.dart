@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:soytul/src/presentation/sections/cart/bloc/cart_bloc.dart';
+import 'package:soytul/src/presentation/widgets/alert_dialog_widget.dart';
 import 'package:soytul/src/presentation/widgets/nav_bar.dart';
 import 'package:soytul/src/presentation/widgets/product_tile_widget.dart';
 
@@ -29,10 +30,12 @@ class CartView extends StatelessWidget {
         ),
         Expanded(
           child: BlocBuilder<CartBloc, CartState>(builder: (_, state) {
-           
-
             if (state is CartsError) {
-              print(state.error);
+              showAlertDialog(
+                context: context,
+                title: "¡Error!",
+                message: state.error,
+              );
             }
 
             if (state is CartsLoaded) {
@@ -64,9 +67,8 @@ class CartView extends StatelessWidget {
           }),
         ),
         BlocBuilder<CartBloc, CartState>(builder: (_, state) {
-          
           if (state is CartsError) {
-            print(state.error);
+            debugPrint(state.error);
           }
 
           if (state is CartsLoaded) {

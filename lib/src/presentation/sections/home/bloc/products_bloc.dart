@@ -30,7 +30,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
       List<Product> _products = await repository.getProducts();
       return ProductsLoaded(products: _products);
     } catch (e) {
-      print(e);
+      debugPrint(e);
       return ProductsError(e);
     }
   }
