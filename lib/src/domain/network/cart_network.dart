@@ -1,15 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:soytul/src/domain/models/cart_model.dart';
 import 'package:soytul/src/domain/models/product_model.dart';
-import 'package:soytul/src/util/utils.dart';
 
 abstract class CartNetworkClass {
+  /// Obtiene los carritos u órdenes pendientes y completadas.
   Future<List<Map<String, dynamic>>> getCarts();
+  /// Agrega un producto al carrito indicado
   Future<bool> addProductToCart(Product product, int idCart);
+  /// Modifica el producto correspondiente en el carrito indicado
   Future<bool> updateProductToCart(Product product, int idCart);
+  /// Elimina el producto correspondiente en el carrito indicado
   Future<bool> deleteProductToCart(Product product, int idCart);
+  /// Obtiene los productos agregados del carrito indicado
   Future<List<Map<String, dynamic>>> getProductsFromCart(int idCart);
+  /// Obtiene el producto corresponiente mediante el `ID` del producto
   Future<List<Map<String, dynamic>>> getProductFromId(int idProduct);
+  /// Finaliza el carrito correspondiente para marcarlo cómo `COMPLETED`
   Future<bool> createCart(Cart cart);
 }
 

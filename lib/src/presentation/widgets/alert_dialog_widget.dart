@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Método para crear la alerta
 void showAlertDialog(
     {@required BuildContext context,
     String message,

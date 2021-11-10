@@ -7,6 +7,7 @@ import 'package:soytul/src/presentation/widgets/nav_bar/DotNavigationBarItem.dar
 import 'package:soytul/src/presentation/widgets/nav_bar/NavBars.dart';
 import 'package:badges/badges.dart';
 
+/// Widget para crear la barra de navegación inferior
 class NavBarWidget extends StatelessWidget {
   final int currentIndex;
   const NavBarWidget({Key key, this.currentIndex = 0}) : super(key: key);

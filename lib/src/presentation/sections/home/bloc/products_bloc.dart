@@ -25,6 +25,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     }
   }
 
+  /// Obtiene toda la lista de productos que existen en la BD
   Future<ProductsState> _loadProducts() async {
     try {
       List<Product> _products = await repository.getProducts();

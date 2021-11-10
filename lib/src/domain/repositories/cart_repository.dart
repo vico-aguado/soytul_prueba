@@ -1,13 +1,14 @@
+import 'package:flutter/foundation.dart';
 import 'package:soytul/src/domain/models/cart_model.dart';
 import 'package:soytul/src/domain/models/product_model.dart';
 import 'package:soytul/src/domain/network/cart_network.dart';
-import 'package:soytul/src/util/utils.dart';
 
 class CartRepository {
   final CartNetworkClass network;
 
   CartRepository(this.network);
 
+  /// Obtiene los carritos u órdenes pendientes y completadas.
   Future<List<Cart>> getCarts() async {
     try {
       List<Map<String, dynamic>> _carts = await network.getCarts();
@@ -33,6 +34,7 @@ class CartRepository {
     }
   }
 
+  /// Agrega un producto al carrito indicado
   Future<bool> addProductToCart(Product product, int idCart) async {
     try {
       bool _success = await network.addProductToCart(product, idCart);
@@ -43,6 +45,7 @@ class CartRepository {
     }
   }
 
+  /// Modifica el producto correspondiente en el carrito indicado
   Future<bool> updateProductToCart(Product product, int idCart) async {
     try {
       bool _success = await network.updateProductToCart(product, idCart);
@@ -53,6 +56,7 @@ class CartRepository {
     }
   }
 
+   /// Elimina el producto correspondiente en el carrito indicado
   Future<bool> deleteProductToCart(Product product, int idCart) async {
     try {
       bool _success = await network.deleteProductToCart(product, idCart);
@@ -63,6 +67,7 @@ class CartRepository {
     }
   }
 
+  /// Finaliza el carrito correspondiente para marcarlo cómo `COMPLETED`
   Future<bool> createOrder(Cart cart) async {
     try {
       bool _success = await network.createCart(cart);

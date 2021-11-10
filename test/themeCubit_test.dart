@@ -3,15 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:mockito/mockito.dart';
-import 'package:soytul/src/domain/models/product_model.dart';
-import 'package:soytul/src/domain/repositories/products_repository.dart';
-import 'package:soytul/src/presentation/sections/home/bloc/products_bloc.dart';
 import 'package:soytul/src/presentation/sections/settings/bloc/theme_cubit.dart';
 
 class MockStorage extends Mock implements HydratedStorage {}
 
 void main() {
-  //TestWidgetsFlutterBinding.ensureInitialized();
   MockStorage storage;
   
 

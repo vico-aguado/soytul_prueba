@@ -6,6 +6,7 @@ import 'package:soytul/src/presentation/widgets/cart_number_stepper.dart';
 
 import 'alert_dialog_widget.dart';
 
+/// Widget para crear la vista de cada producto.
 class ProductTileWidget extends StatelessWidget {
   const ProductTileWidget({
     Key key,
@@ -116,13 +117,13 @@ class ProductTileWidget extends StatelessWidget {
                             }),
                       )
                     : SizedBox(
-                        width: 60,
+                        width: 70,
                         height: 80,
                         child: Center(
                           child: CartStepper<int>(
                             count: product.quantity,
                             radius: Radius.circular(3),
-                            size: 20,
+                            size: 25,
                             didChangeCount: (count) {
                               if (count < 1) {
                                 _deleteFromCart(context);

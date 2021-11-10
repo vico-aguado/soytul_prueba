@@ -6,6 +6,7 @@ import 'package:soytul/src/presentation/widgets/alert_dialog_widget.dart';
 import 'package:soytul/src/presentation/widgets/nav_bar.dart';
 import 'package:soytul/src/presentation/widgets/product_tile_widget.dart';
 
+/// Pantalla de la lista de productos
 class HomeView extends StatelessWidget {
   const HomeView({Key key}) : super(key: key);
 

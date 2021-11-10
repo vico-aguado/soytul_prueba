@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:soytul/src/domain/network/cart_network.dart';
 import 'package:soytul/src/domain/network/products_network.dart';
-import 'package:soytul/src/domain/repositories/cart_repository.dart';
 import 'package:soytul/src/domain/repositories/products_repository.dart';
 import 'package:soytul/src/presentation/sections/cart/cart_view.dart';
 import 'package:soytul/src/presentation/sections/home/bloc/products_bloc.dart';
@@ -10,11 +8,12 @@ import 'package:soytul/src/presentation/sections/home/home_view.dart';
 import 'package:soytul/src/presentation/sections/orders/orders_view.dart';
 import 'package:soytul/src/presentation/sections/settings/settings_view.dart';
 
+/// Clase para generar las rutas usadas dentro de la app
 class AppRouter {
   ProductsRepository _productsRepository;
   
 
-  AppRouter() {
+   AppRouter() {
     //_productsRepository = ProductsRepository(ProductsLocalNetwork());
     _productsRepository = ProductsRepository(ProductsNetwork());
   }
@@ -43,6 +42,8 @@ class AppRouter {
   }
 }
 
+
+/// Clase para crear una transicion de Fade sin movimiento (Material o Cupertino)
 class FadeRoute extends PageRouteBuilder {
   final Widget widget;
   final int duration;

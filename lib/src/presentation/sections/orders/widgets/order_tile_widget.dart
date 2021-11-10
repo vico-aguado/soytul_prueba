@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:soytul/src/domain/models/cart_model.dart';
 
+/// Widget para crear la vista de cada carrito u orden.
 class OrderTileWidget extends StatelessWidget {
   const OrderTileWidget({Key key, this.cart}) : super(key: key);
 

@@ -8,12 +8,13 @@ import 'package:soytul/src/app/bloc_observer.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
 
-  Bloc.observer = MyBlocObserver();
+  await Firebase.initializeApp(); // <-- Inicialización de Firebase
+
+  Bloc.observer = MyBlocObserver(); // <-- Asignar el BlocObserver para la app
 
   HydratedBloc.storage = await HydratedStorage.build(
-    storageDirectory: await getTemporaryDirectory(),
+    storageDirectory: await getTemporaryDirectory(), // <-- Dónde se almacena el estado actual del bloc
   );
 
   runApp(Base());

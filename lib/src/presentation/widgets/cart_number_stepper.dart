@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+/// Widget para crear el widget para modificar el número de productos en el carrito
 class CartStepper<VM extends num> extends StatefulWidget {
   final VM _count;
   final VM _stepper;

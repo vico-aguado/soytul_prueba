@@ -5,6 +5,7 @@ import 'package:soytul/src/presentation/widgets/alert_dialog_widget.dart';
 import 'package:soytul/src/presentation/widgets/nav_bar.dart';
 import 'package:soytul/src/presentation/widgets/product_tile_widget.dart';
 
+/// Pantalla del carrito
 class CartView extends StatelessWidget {
   const CartView({Key key}) : super(key: key);
 

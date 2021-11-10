@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:soytul/src/domain/models/product_model.dart';
 
 abstract class ProductsNetworkClass {
+  /// Obtiene toda la lista de productos que existen en la BD
   Future<List<Map<String, dynamic>>> getProducts();
 }
 

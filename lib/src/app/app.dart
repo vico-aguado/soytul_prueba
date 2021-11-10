@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:soytul/src/app/router.dart';
 import 'package:soytul/src/presentation/sections/settings/bloc/theme_cubit.dart';
 
+
+/// Clase dónde se crea el MeterialApp
+/// [router] = Clase AppRouter para generear las rutas de la app
 class SoytulApp extends StatelessWidget {
   final AppRouter router;
   const SoytulApp({Key key, this.router}) : super(key: key);

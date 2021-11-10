@@ -4,6 +4,7 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:soytul/src/presentation/sections/settings/bloc/theme_cubit.dart';
 import 'package:soytul/src/presentation/widgets/nav_bar.dart';
 
+/// Pantalla de la configuración de la app
 class SettingsView extends StatelessWidget {
   const SettingsView({Key key}) : super(key: key);
 
@@ -27,7 +28,7 @@ class SettingsView extends StatelessWidget {
                             width: 70.0,
                             height: 40.0,
                             toggleSize: 30.0,
-                            value: state == Brightness.light,
+                            value: state != Brightness.light,
                             borderRadius: 30.0,
                             padding: 2.0,
                             activeToggleColor: Color(0xFF6E40C9),

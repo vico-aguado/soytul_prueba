@@ -45,10 +45,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     }
   }
 
+  /// Finaliza el carrito correspondiente para marcarlo cómo `COMPLETED`
   Future<CartState> _createOrder() async {
     try {
        await repository.createOrder(cartPending);
-
       return await _loadCarts();
     } catch (e) {
       debugPrint(e);
@@ -56,6 +56,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     }
   }
 
+  /// Obtiene los carritos u órdenes pendientes y completadas.
   Future<CartState> _loadCarts() async {
     try {
       List<Cart> _carts = await repository.getCarts();
@@ -76,6 +77,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     }
   }
 
+  /// Agrega un producto al carrito indicado
   Future<CartState> _addProduct(Product product) async {
     try {
       bool isUpdate = false;
@@ -100,6 +102,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     }
   }
 
+  /// Elimina el producto correspondiente en el carrito indicado
   Future<CartState> _deleteProduct(Product product) async {
     try {
       for (var i = 0; i < cartPending.products.length; i++) {
@@ -118,6 +121,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     }
   }
 
+  /// Modifica el producto correspondiente en el carrito indicado
   Future<CartState> _updateProduct(Product product, int quantity) async {
     try {
       for (var i = 0; i < cartPending.products.length; i++) {

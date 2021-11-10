@@ -4,6 +4,7 @@ import 'package:soytul/src/presentation/sections/cart/bloc/cart_bloc.dart';
 import 'package:soytul/src/presentation/sections/orders/widgets/order_tile_widget.dart';
 import 'package:soytul/src/presentation/widgets/nav_bar.dart';
 
+/// Pantalla de Órdenes.
 class OrdersView extends StatelessWidget {
   const OrdersView({Key key}) : super(key: key);
 
